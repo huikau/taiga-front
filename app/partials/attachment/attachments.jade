@@ -5,7 +5,7 @@ section.attachments
             span.attachments-text attachments
         .add-attach(tg-check-permission!="modify_<%- type %>", title!="Add new attachment. <%- maxFileSizeMsg %>")
             <% if (maxFileSize){ %>
-            span.size-info.hidden [Max. size:  <%- maxFileSize %>]
+            span.size-info.hidden(translate, translate-values!="{ 'maxFileSize': '<%- maxFileSize %>'}") [Max. size:  {{maxFileSize}}]
             <% }; %>
             label(for="add-attach", class="icon icon-plus related-tasks-buttons")
             input(id="add-attach", type="file", multiple="multiple")
@@ -22,9 +22,9 @@ section.attachments
                 span(ng-bind="file.progressMessage")
                 .percentage(ng-style="{'width': file.progressPercent}")
 
-        a.more-attachments(href="", title="show deprecated atachments", ng-if="ctrl.deprecatedAttachmentsCount > 0")
-            span.text(data-type="show") + show deprecated atachments
-            span.text.hidden(data-type="hide")
+        a.more-attachments(href="", title="{{'show deprecated atachments' | translate}}", ng-if="ctrl.deprecatedAttachmentsCount > 0")
+            span.text(data-type="show", translate) + show deprecated atachments
+            span.text.hidden(data-type="hide", translate)
                 | - hide deprecated atachments
-            span.more-attachments-num
+            span.more-attachments-num(translate)
                 | ({{ctrl.deprecatedAttachmentsCount }} deprecated)

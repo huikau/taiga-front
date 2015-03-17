@@ -145,7 +145,7 @@ module.controller("IssueDetailController", IssueDetailController)
 ## Issue status display directive
 #############################################################################
 
-IssueStatusDisplayDirective = ($template)->
+IssueStatusDisplayDirective = ($template, $compile)->
     # Display if a Issue is open or closed and its issueboard status.
     #
     # Example:
@@ -162,6 +162,9 @@ IssueStatusDisplayDirective = ($template)->
             html = template({
                 status: $scope.statusById[issue.status]
             })
+
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         $scope.$watch $attrs.ngModel, (issue) ->
@@ -176,14 +179,14 @@ IssueStatusDisplayDirective = ($template)->
         require: "ngModel"
     }
 
-module.directive("tgIssueStatusDisplay", ["$tgTemplate", IssueStatusDisplayDirective])
+module.directive("tgIssueStatusDisplay", ["$tgTemplate", "$compile", IssueStatusDisplayDirective])
 
 
 #############################################################################
 ## Issue status button directive
 #############################################################################
 
-IssueStatusButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template) ->
+IssueStatusButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template, $compile) ->
     # Display the status of Issue and you can edit it.
     #
     # Example:
@@ -208,6 +211,9 @@ IssueStatusButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $t
                 statuses: $scope.statusList
                 editable: isEditable()
             })
+
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         save = $qqueue.bindAdd (statusId) =>
@@ -265,7 +271,7 @@ module.directive("tgIssueStatusButton", ["$rootScope", "$tgRepo", "$tgConfirm", 
 ## Issue type button directive
 #############################################################################
 
-IssueTypeButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template) ->
+IssueTypeButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template, $compile) ->
     # Display the type of Issue and you can edit it.
     #
     # Example:
@@ -284,6 +290,8 @@ IssueTypeButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $tem
 
         render = (issue) =>
             type = $scope.typeById[issue.type]
+
+            html = $compile(html)($scope)
 
             html = template({
                 type: type
@@ -340,14 +348,14 @@ IssueTypeButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $tem
         require: "ngModel"
     }
 
-module.directive("tgIssueTypeButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQqueue", "$tgTemplate", IssueTypeButtonDirective])
+module.directive("tgIssueTypeButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQqueue", "$tgTemplate", "$compile", IssueTypeButtonDirective])
 
 
 #############################################################################
 ## Issue severity button directive
 #############################################################################
 
-IssueSeverityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template) ->
+IssueSeverityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template, $compile) ->
     # Display the severity of Issue and you can edit it.
     #
     # Example:
@@ -372,6 +380,9 @@ IssueSeverityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, 
                 severityes: $scope.severityList
                 editable: isEditable()
             })
+
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         save = $qqueue.bindAdd (severity) =>
@@ -424,14 +435,14 @@ IssueSeverityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, 
         require: "ngModel"
     }
 
-module.directive("tgIssueSeverityButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQqueue", "$tgTemplate", IssueSeverityButtonDirective])
+module.directive("tgIssueSeverityButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQqueue", "$tgTemplate", "$compile", IssueSeverityButtonDirective])
 
 
 #############################################################################
 ## Issue priority button directive
 #############################################################################
 
-IssuePriorityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template) ->
+IssuePriorityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, $template, $compile) ->
     # Display the priority of Issue and you can edit it.
     #
     # Example:
@@ -456,6 +467,9 @@ IssuePriorityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, 
                 priorityes: $scope.priorityList
                 editable: isEditable()
             })
+
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         save = $qqueue.bindAdd (priority) =>
@@ -508,7 +522,7 @@ IssuePriorityButtonDirective = ($rootScope, $repo, $confirm, $loading, $qqueue, 
         require: "ngModel"
     }
 
-module.directive("tgIssuePriorityButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQqueue", "$tgTemplate", IssuePriorityButtonDirective])
+module.directive("tgIssuePriorityButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$tgLoading", "$tgQqueue", "$tgTemplate", "$compile", IssuePriorityButtonDirective])
 
 
 #############################################################################

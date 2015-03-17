@@ -10,21 +10,21 @@ div.wrapper.roles(tg-github-webhooks, ng-controller="GithubController as ctrl",
 
         form
             fieldset
-                label(for="secret-key") Secret key
-                input(type="text", name="secret-key", ng-model="github.secret", placeholder="Secret key", id="secret-key")
+                label(for="secret-key", translate) Secret key
+                input(type="text", name="secret-key", ng-model="github.secret", placeholder="{{'Secret key' | translate}}", id="secret-key")
 
             fieldset
                 .select-input-text(tg-select-input-text)
                     div
-                        label(for="payload-url") Payload URL
+                        label(for="payload-url", translate) Payload URL
                         .field-with-option
-                            input(type="text", ng-model="github.webhooks_url", name="payload-url", readonly="readonly", placeholder="Payload URL", id="payload-url")
+                            input(type="text", ng-model="github.webhooks_url", name="payload-url", readonly="readonly", placeholder="{{'Payload URL' | translate}}", id="payload-url")
                             .option-wrapper.select-input-content
                                 .icon.icon-copy
-                        .help-copy Copy to clipboard: Ctrl+C
+                        .help-copy(translate) Copy to clipboard: Ctrl+C
 
-            button.button-green.submit-button(type="submit", title="Save") Save
+            button.button-green.submit-button(type="submit", title="{{'Save' | translate}}") Save
 
         a.help-button(href="https://taiga.io/support/github-integration/", target="_blank")
             span.icon.icon-help
-            span Do you need help? Check out our support page!
+            span(translate) Do you need help? Check out our support page!

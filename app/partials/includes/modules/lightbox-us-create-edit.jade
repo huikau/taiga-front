@@ -1,4 +1,4 @@
-a.close(href="", title="close")
+a.close(href="", title="{{'close' | translate}}")
     span.icon.icon-delete
 form
     h2.title(tr="us.title-new")
@@ -18,7 +18,7 @@ form
 
     fieldset
         textarea.description(name="description", ng-model="us.description",
-                             placeholder="Please add descriptive text to help others better understand this US")
+                             placeholder="{{'Please add descriptive text to help others better understand this US' | translate}}")
     div.settings
         fieldset.team-requirement
             input(type="checkbox", name="team_requirement", ng-model="us.team_requirement",
@@ -36,4 +36,4 @@ form
 
     tg-blocking-message-input(watch="us.is_blocked", ng-model="us.blocked_note")
 
-    button.button-green.submit-button(type="submit", title="Create") Create
+    button.button-green.submit-button(type="submit", title="{{'Create' | translate}}", translate) Create

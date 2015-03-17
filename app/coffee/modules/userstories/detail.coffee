@@ -154,7 +154,7 @@ module.controller("UserStoryDetailController", UserStoryDetailController)
 ## User story status display directive
 #############################################################################
 
-UsStatusDisplayDirective = ($template) ->
+UsStatusDisplayDirective = ($template, $compile) ->
     # Display if a US is open or closed and its kanban status.
     #
     # Example:
@@ -172,6 +172,9 @@ UsStatusDisplayDirective = ($template) ->
                 is_closed: us.is_closed
                 status: $scope.statusById[us.status]
             })
+
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         $scope.$watch $attrs.ngModel, (us) ->
@@ -186,14 +189,14 @@ UsStatusDisplayDirective = ($template) ->
         require: "ngModel"
     }
 
-module.directive("tgUsStatusDisplay", ["$tgTemplate", UsStatusDisplayDirective])
+module.directive("tgUsStatusDisplay", ["$tgTemplate", "$compile", UsStatusDisplayDirective])
 
 
 #############################################################################
 ## User story related tasts progress splay Directive
 #############################################################################
 
-UsTasksProgressDisplayDirective = ($template) ->
+UsTasksProgressDisplayDirective = ($template, $compile) ->
     # Display a progress bar with the stats of completed tasks.
     #
     # Example:
@@ -217,6 +220,9 @@ UsTasksProgressDisplayDirective = ($template) ->
                 totalClosedTasks: totalClosedTasks
                 progress: progress
             })
+
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         $scope.$watch $attrs.ngModel, (tasks) ->
@@ -231,7 +237,7 @@ UsTasksProgressDisplayDirective = ($template) ->
         require: "ngModel"
     }
 
-module.directive("tgUsTasksProgressDisplay", ["$tgTemplate", UsTasksProgressDisplayDirective])
+module.directive("tgUsTasksProgressDisplay", ["$tgTemplate", "$compile", UsTasksProgressDisplayDirective])
 
 
 #############################################################################
@@ -326,7 +332,7 @@ module.directive("tgUsStatusButton", ["$rootScope", "$tgRepo", "$tgConfirm", "$t
 ## User story team requirements button directive
 #############################################################################
 
-UsTeamRequirementButtonDirective = ($rootscope, $tgrepo, $confirm, $loading, $qqueue, $template) ->
+UsTeamRequirementButtonDirective = ($rootscope, $tgrepo, $confirm, $loading, $qqueue, $template, $compile) ->
     template = $template.get("us/us-team-requirement-button.html", true)
 
     link = ($scope, $el, $attrs, $model) ->
@@ -343,6 +349,8 @@ UsTeamRequirementButtonDirective = ($rootscope, $tgrepo, $confirm, $loading, $qq
                 isRequired: us.team_requirement
             }
             html = template(ctx)
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         save = $qqueue.bindAdd (team_requirement) =>

@@ -1,52 +1,52 @@
 section.filters
     div.filters-inner
         h1
-            span.title filters
+            span.title(translate) filters
         form
             fieldset
-                input(type="text", placeholder="Subject or reference", ng-model="filtersQ")
-                a.icon.icon-search(href="", title="search")
+                input(type="text", placeholder="{{'Subject or reference' | translate}}", ng-model="filtersQ")
+                a.icon.icon-search(href="", title="{{'search' | translate}}")
         div.filters-step-cat
             div.filters-applied
-            a.hide.button.button-gray.save-filters(href="", title="save", ng-class="{hide: filters.length}") save as custom filter
+            a.hide.button.button-gray.save-filters(href="", title="{{'save' | translate}}", ng-class="{hide: filters.length}", translate) save as custom filter
             h2.hidden.breadcrumb
-                a.back(href="", title="back to categories") Filters
+                a.back(href="", title="{{'back to categories' | translate}}", translate) Filters
                 span.icon-arrow-right
                 a.subfilter(href="", title="cat-name")
-                    span.title status
+                    span.title(translate) status
             div.filters-cats
                 ul
                     li
                         a(href="", title="Type", data-type="types")
-                            span.title Type
+                            span.title(translate) Type
                             span.icon.icon-arrow-right
                     li
                         a(href="", title="Status", data-type="statuses")
-                            span.title Status
+                            span.title(translate) Status
                             span.icon.icon-arrow-right
                     li
                         a(href="", title="Severity", data-type="severities")
-                            span.title Severity
+                            span.title(translate) Severity
                             span.icon.icon-arrow-right
                     li
                         a(href="", title="Priorities", data-type="priorities")
-                            span.title Priorities
+                            span.title(translate) Priorities
                             span.icon.icon-arrow-right
                     li
                         a(href="", title="Tags", data-type="tags")
-                            span.title Tags
+                            span.title(translate) Tags
                             span.icon.icon-arrow-right
                     li
                         a(href="", title="Assigned to", data-type="assignedTo")
-                            span.title Assigned to
+                            span.title(translate) Assigned to
                             span.icon.icon-arrow-right
                     li
                         a(href="", title="Created by", data-type="createdBy")
-                            span.title Created by
+                            span.title(translate) Created by
                             span.icon.icon-arrow-right
                     li.custom-filters(ng-if="filters.myFilters.length")
-                        a(href="", title="Custom filters", data-type="myFilters")
-                            span.title Custom filters
+                        a(href="", title="{{'Custom filters' | translate}}", data-type="myFilters")
+                            span.title(translate) Custom filters
                             span.icon.icon-arrow-right
 
         div.filter-list.hidden

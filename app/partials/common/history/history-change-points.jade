@@ -1,14 +1,14 @@
 <% _.each(points, function(point, name) { %>
 .change-entry
     .activity-changed
-        span US points (<%- name.toLowerCase() %>)
+        span(translate, translate-values!="<%- name.toLowerCase() %>") US points ({{name}})
     .activity-fromto
         p
-            strong from
+            strong(translate) from
             br
             span <%- point[0] %>
         p
-            strong  to
+            strong(translate)  to
             br
             span <%- point[1] %>
 <% }); %>

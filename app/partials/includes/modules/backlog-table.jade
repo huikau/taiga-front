@@ -1,9 +1,9 @@
 div.backlog-table-header
     div.row.backlog-table-title
-        div.user-stories User Stories
-        div.status Status
-        div.points(tg-us-role-points-selector, title="Select view per Role")
-            span.header-points Points
+        div.user-stories(translate) User Stories
+        div.status(translate) Status
+        div.points(tg-us-role-points-selector, title="{{'Select view per Role' | translate}}")
+            span.header-points(translate) Points
             span.icon.icon-arrow-bottom
 
 div.backlog-table-body(tg-backlog-sortable, ng-class="{'show-tags': ctrl.showTags, 'active-filters': ctrl.activeFilters}" )

@@ -310,7 +310,7 @@ module.controller("IssuesController", IssuesController)
 ## Issues Directive
 #############################################################################
 
-IssuesDirective = ($log, $location, $template) ->
+IssuesDirective = ($log, $location, $template, $compile) ->
     ## Issues Pagination
     template = $template.get("issue/issue-paginator.html", true)
 
@@ -360,7 +360,11 @@ IssuesDirective = ($log, $location, $template) ->
                 else
                     pages.push({classes: "page", num: i, type: "page"})
 
-            $pagEl.html(template(options))
+
+            html = template(options)
+            html = $compile(html)($scope)
+
+            $pagEl.html(html)
 
         $scope.$watch "issues", (value) ->
             # Do nothing if value is not logical true
@@ -427,7 +431,7 @@ IssuesDirective = ($log, $location, $template) ->
 
     return {link:link}
 
-module.directive("tgIssues", ["$log", "$tgLocation", "$tgTemplate", IssuesDirective])
+module.directive("tgIssues", ["$log", "$tgLocation", "$tgTemplate", "$compile", IssuesDirective])
 
 
 #############################################################################

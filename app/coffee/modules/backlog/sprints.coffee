@@ -85,8 +85,8 @@ module.directive("tgBacklogSprint", ["$tgRepo", "$rootScope", BacklogSprintDirec
 ## Sprint Header Directive
 #############################################################################
 
-BacklogSprintHeaderDirective = ($navUrls, $template) ->
-    template = $template.get("backlog/sprint-header.html", true)
+BacklogSprintHeaderDirective = ($navUrls, $template, $compile) ->
+    template = $template.get("backlog/sprint-header.html")
 
     link = ($scope, $el, $attrs, $model) ->
         isEditable = ->
@@ -112,8 +112,13 @@ BacklogSprintHeaderDirective = ($navUrls, $template) ->
                 isVisible: isVisible()
                 isEditable: isEditable()
             }
-            $el.html(template(ctx))
 
+            templateScope = $scope.$new()
+
+            _.assign(templateScope, ctx)
+
+            compiledTemplate = $compile(template)(templateScope)
+            $el.html(compiledTemplate)
 
         $scope.$watch $attrs.ngModel, (sprint) ->
             render(sprint)
@@ -130,7 +135,7 @@ BacklogSprintHeaderDirective = ($navUrls, $template) ->
         require: "ngModel"
     }
 
-module.directive("tgBacklogSprintHeader", ["$tgNavUrls", "$tgTemplate", BacklogSprintHeaderDirective])
+module.directive("tgBacklogSprintHeader", ["$tgNavUrls", "$tgTemplate", "$compile", BacklogSprintHeaderDirective])
 
 #############################################################################
 ## Toggle Closed Sprints Directive

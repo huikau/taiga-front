@@ -3,10 +3,10 @@ div.home-projects-list(ng-controller="ProjectsController as ctrl")
     .home-projects-wrapper
         div.welcome-user
             div.info
-                p
+                p(translate)
                     | Welcome
                     span(tg-bo-bind="ctrl.user.full_name_display")
-                a.logout(ng-click="ctrl.logout()" href="", title="Logout") logout
+                a.logout(ng-click="ctrl.logout()" href="", title="{{'Logout' | translate}}", translate) logout
 
             .avatar
                 img(tg-bo-src="ctrl.user.photo", tg-bo-alt="ctrl.user.full_name_display")
@@ -21,14 +21,13 @@ div.home-projects-list(ng-controller="ProjectsController as ctrl")
                                 p(tg-bo-bind="project.description")
 
             div.all-projects
-                h1 Projects
+                h1(translate) Projects
                 div(tg-projects-list)
 
                 .create-project-button-wrapper
-                    a.button-green.create-project-button(href="", ng-click="ctrl.newProject()", title="Create new project")
-                        span Create project
+                    a.button-green.create-project-button(href="", ng-click="ctrl.newProject()", title="{{'Create new project' | translate}}")
+                        span(translate) Create project
                     div(tg-import-project-button)
-                        a.button-blackish.import-project-button(href="", title="Import project")
+                        a.button-blackish.import-project-button(href="", title="{{'Import project' | translate}}")
                             span.icon.icon-upload
                         input.import-file.hidden(type="file")
-

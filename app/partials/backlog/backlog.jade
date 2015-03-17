@@ -11,23 +11,23 @@ div.wrapper(tg-backlog, ng-controller="BacklogController as ctrl",
                 include ../includes/modules/burndown
         div.backlog-menu
             div.backlog-table-options
-                a.trans-button.move-to-current-sprint(href="", title="Move to Current Sprint",
+                a.trans-button.move-to-current-sprint(href="", title="{{'Move to Current Sprint' | translate}}",
                                                       id="move-to-current-sprint")
                     span.icon.icon-move
-                    span.text Move to current Sprint
-                a.trans-button(href="", title="Show Filters", id="show-filters-button")
+                    span.text(translate) Move to current Sprint
+                a.trans-button(href="", title="{{'Show Filters' | translate}}", id="show-filters-button")
                     span.icon.icon-filter
-                    span.text Show Filters
-                a.trans-button(href="", title="Show Tags", id="show-tags")
+                    span.text(translate) Show Filters
+                a.trans-button(href="", title="{{'Show Tags' | translate}}", id="show-tags")
                     span.icon.icon-tag
-                    span.text Show Tags
+                    span.text(translate) Show Tags
             include ../includes/components/addnewus
         section.backlog-table(ng-class="{'hidden': !visibleUserstories.length}")
             include ../includes/modules/backlog-table
         div.empty.empty-backlog(ng-class="{'hidden': visibleUserstories.length}", tg-backlog-empty-sortable)
             span.icon.icon-backlog
-            span.title Your backlog is empty!
-            a(href="", title+"Create a new US", ng-click="ctrl.addNewUs('standard')", tg-check-permission="add_us") You may want to create a new user story
+            span.title(translate) Your backlog is empty!
+            a(href="", title="{{'Create a new US' | translate}}", ng-click="ctrl.addNewUs('standard')", tg-check-permission="add_us", translate) You may want to create a new user story
     sidebar.menu-secondary.sidebar
         include ../includes/modules/sprints
 

@@ -55,7 +55,7 @@ module = angular.module("taigaCommon")
 #############################################################################
 ## WYSIWYG markitup editor directive
 #############################################################################
-tgMarkitupDirective = ($rootscope, $rs, $tr, $selectedText, $template) ->
+tgMarkitupDirective = ($rootscope, $rs, $tr, $selectedText, $template, $compile) ->
     previewTemplate = $template.get("common/wysiwyg/wysiwyg-markitup-preview.html", true)
 
     link = ($scope, $el, $attrs, $model) ->
@@ -76,7 +76,10 @@ tgMarkitupDirective = ($rootscope, $rs, $tr, $selectedText, $template) ->
             markdownDomNode = element.parents(".markdown")
             markItUpDomNode = element.parents(".markItUp")
             $rs.mdrender.render($scope.projectId, $model.$modelValue).then (data) ->
-                markdownDomNode.append(previewTemplate({data: data.data}))
+                html = previewTemplate({data: data.data})
+                html = $compile(html)($scope)
+
+                markdownDomNode.append(html)
                 markItUpDomNode.hide()
 
                 markdown = element.closest(".markdown")

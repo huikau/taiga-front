@@ -221,7 +221,7 @@ AttachmentsDirective = ($config, $confirm, $templates) ->
         maxFileSize = $config.get("maxUploadFileSize", null)
         maxFileSize = sizeFormat(maxFileSize) if maxFileSize
         maxFileSizeMsg = if maxFileSize then "Maximum upload size is #{maxFileSize}" else "" # TODO: i18n
-
+        maxFileSize = 4000
         ctx = {
             type: $attrs.type
             maxFileSize: maxFileSize
@@ -242,7 +242,7 @@ AttachmentsDirective = ($config, $confirm, $templates) ->
 module.directive("tgAttachments", ["$tgConfig", "$tgConfirm", "$tgTemplate", AttachmentsDirective])
 
 
-AttachmentDirective = ($template) ->
+AttachmentDirective = ($template, $compile) ->
     template = $template.get("attachment/attachment.html", true)
     templateEdit = $template.get("attachment/attachment-edit.html", true)
 
@@ -263,9 +263,9 @@ AttachmentDirective = ($template) ->
             }
 
             if edit
-                html = templateEdit(ctx)
+                html = $compile(templateEdit(ctx))($scope)
             else
-                html = template(ctx)
+                html = $compile(template(ctx))($scope)
 
             $el.html(html)
 
@@ -322,4 +322,4 @@ AttachmentDirective = ($template) ->
         restrict: "AE"
     }
 
-module.directive("tgAttachment", ["$tgTemplate", AttachmentDirective])
+module.directive("tgAttachment", ["$tgTemplate", "$compile", AttachmentDirective])

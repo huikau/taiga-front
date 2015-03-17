@@ -4,38 +4,38 @@
 section.filters
     div.filters-inner
         h1
-            span.title filters
+            span.title(translate) filters
 
         form
             fieldset
-                input(type="text", placeholder="Subject or reference", ng-model="filtersQ")
-                a.icon.icon-search(href="", title="search")
+                input(type="text", placeholder="{{'Subject or reference' | translate}}", ng-model="filtersQ")
+                a.icon.icon-search(href="", title="{{'search' | translate}}")
         h2
-            a.hidden(href="", title="cat-name")
-                span.title status
+            a.hidden(href="")
+                span.title(translate) status
         div.filters-step-cat
             div.filters-applied
             div.filters-cats
                 ul
                     li
-                        a(href="", title="Status", data-type="statuses")
-                            span.title Status
+                        a(href="", title="{{'Status' | translate}}", data-type="statuses")
+                            span.title(translate) Status
                             span.icon.icon-arrow-right
                     li
-                        a(href="", title="Severity", data-type="severities")
-                            span.title Severity
+                        a(href="", title="{{'Severity' | translate}}", data-type="severities")
+                            span.title(translate) Severity
                             span.icon.icon-arrow-right
                     li
-                        a(href="", title="Priorities", data-type="priorities")
-                            span.title Priorities
+                        a(href="", title="{{'Priorities' | translate}}", data-type="priorities")
+                            span.title(translate) Priorities
                             span.icon.icon-arrow-right
                     li
-                        a(href="", title="Tags", data-type="tags")
-                            span.title Tags
+                        a(href="", title="{{'Tags' | translate}}", data-type="tags")
+                            span.title(translate) Tags
                             span.icon.icon-arrow-right
                     li
-                        a(href="", title="Assigned to", data-type="assignedTo")
-                            span.title Assigned to
+                        a(href="", title="{{'Assigned to' | translate}}", data-type="assignedTo")
+                            span.title(translate) Assigned to
                             span.icon.icon-arrow-right
 
         div.filter-list.hidden

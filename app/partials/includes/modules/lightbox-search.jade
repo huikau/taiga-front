@@ -1,8 +1,8 @@
-a.close(href="", title="close")
+a.close(href="", title="{{'close' | translate}}")
     span.icon.icon-delete
 form
-    h2.title Search
+    h2.title(translate) Search
     fieldset
-        input(type="text", name="text", id="search-text", placeholder="What are you looking for?", data-required="true")
+        input(type="text", name="text", id="search-text", placeholder="{{'What are you looking for?' | translate}}", data-required="true")
     fieldset
-        button.button-green.submit-button(type="submit", title="Search") Search
+        button.button-green.submit-button(type="submit", title="{{'Search' | translate}}", translate) Search

@@ -15,42 +15,42 @@ div.wrapper(tg-user-profile, ng-controller="UserSettingsController as ctrl",
                         .image-container
                             img.avatar(ng-src="{{user.big_photo}}" alt="avatar")
                             .overlay.hidden
-                                img.loading-spinner(src="/svg/spinner-circle.svg", alt="loading...")
+                                img.loading-spinner(src="/svg/spinner-circle.svg", alt="{{'loading...' | translate}}")
                         input(type="file", id="avatar-field", class="hidden",
                             tg-avatar-model="avatarAttachment")
-                        p The image will be cropped to 80x80px.<br>
+                        p(translate) The image will be cropped to 80x80px.<br>
                             span.size-info.hidden(tg-bo-html="maxFileSizeMsg")
-                        a.button-green.change.js-change-avatar(tg-bo-title="'Change photo. ' + maxFileSizeMsg") Change
-                        a.use-gravatar Use gravatar image
+                        a.button-green.change.js-change-avatar(tg-bo-title="{{'Change photo.'}} + ' ' + maxFileSizeMsg") Change
+                        a.use-gravatar(translate) Use gravatar image
 
                 div.data
                     fieldset
-                        label(for="email") Username
-                        input(type="text", name="username", id="username", placeholder="username",
+                        label(for="email", translate) Username
+                        input(type="text", name="username", id="username", placeholder="{{'username' | translate}}",
                             ng-model="user.username", data-required="true", data-maxlength="255",
                             data-regexp="^[\\w.-]+$")
 
                     fieldset
-                        label(for="email") Email
-                        input(type="text", name="email", id="email", placeholder="email",
+                        label(for="email", translate) Email
+                        input(type="text", name="email", id="email", placeholder="{{'email' | translate}}",
                               ng-model="user.email", data-type="email", data-required="true",
                               data-maxlength="255")
 
                     fieldset
-                        label(for="full-name") Full name
+                        label(for="full-name", translate) Full name
                         input(type="text", name="full_name", id="full-name",
-                              placeholder="Set your full name (ex. Íñigo Montoya)",
+                              placeholder="{{'Set your full name (ex. Íñigo Montoya)' | translate}}",
                               ng-model="user.full_name", data-required="true",
                               data-maxlength="256")
 
                     fieldset
-                        label(for="bio") Bio
-                        textarea(name="bio", id="bio", placeholder="Tell us something about you",
+                        label(for="bio", translate) Bio
+                        textarea(name="bio", id="bio", placeholder="{{'Tell us something about you' | translate}}",
                                  ng-model="user.bio")
 
             fieldset.submit
-                button.button-green.submit-button(type="submit", title="Save") Save
-                a.delete-account(href="", title="Delete Taiga account",
-                                 ng-click="ctrl.openDeleteLightbox()") Delete Taiga account
+                button.button-green.submit-button(type="submit", title="{{'Save' | translate}}", translate) Save
+                a.delete-account(href="", title="{{'Delete Taiga account' | translate}}",
+                                 ng-click="ctrl.openDeleteLightbox()", translate) Delete Taiga account
 
 div.lightbox.lightbox-delete-account(tg-lb-delete-user)

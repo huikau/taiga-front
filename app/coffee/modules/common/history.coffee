@@ -177,11 +177,15 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
             customAttributes = _.map value, (changes, type) ->
                 if type == "new"
                     return _.map changes, (change) ->
-                        return templateChangeGeneric({
+                        html = templateChangeGeneric({
                             name: change.name,
                             from: formatChange(""),
                             to: formatChange(change.value)
                         })
+
+                        html = $compile(html)($scope)
+
+                        return html
                 else if type == "deleted"
                     return _.map changes, (change) ->
                         # TODO: i18n
@@ -207,7 +211,11 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
             else if field == "blocked_note"
                 return templateChangeDiff({name: getHumanizedFieldName("blocked_note"), diff: value[1]})
             else if field == "points"
-                return templateChangePoints({points: value})
+                html = templateChangePoints({points: value})
+
+                html = $compile(html)($scope)
+
+                return html
             else if field == "attachments"
                 return renderAttachmentEntry(value)
             else if field == "custom_attributes"
@@ -216,7 +224,11 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
                 name = getHumanizedFieldName(field)
                 removed = _.difference(value[0], value[1])
                 added = _.difference(value[1], value[0])
-                return templateChangeList({name:name, removed:removed, added: added})
+                html = templateChangeList({name:name, removed:removed, added: added})
+
+                html = $compile(html)($scope)
+
+                return html
             else if field == "assigned_to"
                 name = getHumanizedFieldName(field)
                 from = formatChange(value[0] or "Unassigned")
@@ -239,7 +251,7 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
 
         renderComment = (comment) ->
             if (comment.delete_comment_date or comment.delete_comment_user?.name)
-                return templateDeletedComment({
+                html = templateDeletedComment({
                     deleteCommentDate: moment(comment.delete_comment_date).format("DD MMM YYYY HH:mm") if comment.delete_comment_date
                     deleteCommentUser: comment.delete_comment_user.name
                     deleteComment: comment.comment_html
@@ -247,7 +259,11 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
                     canRestoreComment: comment.delete_comment_user.pk == $scope.user.id or $scope.project.my_permissions.indexOf("modify_project") > -1
                 })
 
-            return templateActivity({
+                html = $compile(html)($scope)
+
+                return html
+
+            html = templateActivity({
                 avatar: getUserAvatar(comment.user.pk)
                 userFullName: comment.user.name
                 creationDate: moment(comment.created_at).format("DD MMM YYYY HH:mm")
@@ -260,6 +276,10 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
                 activityId: comment.id
                 canDeleteComment: comment.user.pk == $scope.user?.id or $scope.project.my_permissions.indexOf("modify_project") > -1
             })
+
+            html = $compile(html)($scope)
+
+            return html
 
         renderChange = (change) ->
             return templateActivity({
@@ -281,7 +301,11 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
             else
                 showMore = totalEntries - entries.length
 
-            return templateBaseEntries({entries: entries, showMore:showMore})
+            html = templateBaseEntries({entries: entries, showMore:showMore})
+
+            html = $compile(html)($scope)
+
+            return html
 
         # Render into DOM (operations with dom mutability)
 
@@ -394,7 +418,11 @@ HistoryDirective = ($log, $loading, $qqueue, $template, $confirm) ->
             $el.off()
 
     templateFn = ($el, $attrs) ->
-        return templateBase({ngmodel: $attrs.ngModel, type: $attrs.type, mode: $attrs.mode})
+        html = templateBase({ngmodel: $attrs.ngModel, type: $attrs.type, mode: $attrs.mode})
+
+        html = $compile(html)($scope)
+
+        return html
 
     return {
         controller: HistoryController

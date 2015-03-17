@@ -220,7 +220,7 @@ module.directive("tgLbBlock", ["$rootScope", "$tgRepo", "$tgConfirm", "lightboxS
 ## Generic Lightbox Blocking-Message Input Directive
 #############################################################################
 
-BlockingMessageInputDirective = ($log, $template) ->
+BlockingMessageInputDirective = ($log, $template, $compile) ->
     template = $template.get("common/lightbox/lightbox-blocking-message-input.html", true)
 
     link = ($scope, $el, $attrs, $model) ->
@@ -234,7 +234,11 @@ BlockingMessageInputDirective = ($log, $template) ->
                 $el.find(".blocked-note").addClass("hidden")
 
     templateFn = ($el, $attrs) ->
-        return template({ngmodel: $attrs.ngModel})
+        html = template({ngmodel: $attrs.ngModel})
+
+        html = $compile(html)($scope)
+
+        return html
 
     return {
         template: templateFn
@@ -243,7 +247,7 @@ BlockingMessageInputDirective = ($log, $template) ->
         restrict: "EA"
     }
 
-module.directive("tgBlockingMessageInput", ["$log", "$tgTemplate", BlockingMessageInputDirective])
+module.directive("tgBlockingMessageInput", ["$log", "$tgTemplate", "$compile", BlockingMessageInputDirective])
 
 
 #############################################################################
@@ -424,7 +428,7 @@ module.directive("tgLbCreateBulkUserstories", [
 ## AssignedTo Lightbox Directive
 #############################################################################
 
-AssignedToLightboxDirective = (lightboxService, lightboxKeyboardNavigationService, $template) ->
+AssignedToLightboxDirective = (lightboxService, lightboxKeyboardNavigationService, $template, $compile) ->
     link = ($scope, $el, $attrs) ->
         selectedUser = null
         selectedItem = null
@@ -458,6 +462,9 @@ AssignedToLightboxDirective = (lightboxService, lightboxKeyboardNavigationServic
             }
 
             html = usersTemplate(ctx)
+
+            html = $compile(html)($scope)
+
             $el.find("div.watchers").html(html)
             lightboxKeyboardNavigationService.init($el)
 
@@ -517,7 +524,7 @@ AssignedToLightboxDirective = (lightboxService, lightboxKeyboardNavigationServic
     }
 
 
-module.directive("tgLbAssignedto", ["lightboxService", "lightboxKeyboardNavigationService", "$tgTemplate", AssignedToLightboxDirective])
+module.directive("tgLbAssignedto", ["lightboxService", "lightboxKeyboardNavigationService", "$tgTemplate", "$compile", AssignedToLightboxDirective])
 
 
 #############################################################################

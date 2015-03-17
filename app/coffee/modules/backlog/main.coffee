@@ -693,7 +693,7 @@ module.directive("tgBacklog", ["$tgRepo", "$rootScope", BacklogDirective])
 ## User story points directive
 #############################################################################
 
-UsRolePointsSelectorDirective = ($rootscope, $template) ->
+UsRolePointsSelectorDirective = ($rootscope, $template, $compile) ->
     #TODO: i18n
     selectionTemplate = $template.get("backlog/us-role-points-popover.html", true)
 
@@ -704,7 +704,7 @@ UsRolePointsSelectorDirective = ($rootscope, $template) ->
             numberOfRoles = _.size(roles)
 
             if numberOfRoles > 1
-                $el.append(selectionTemplate({"roles":roles}))
+                $el.append($compile(selectionTemplate({"roles": roles}))($scope))
             else
                 $el.find(".icon-arrow-bottom").remove()
                 $el.find(".header-points").addClass("not-clickable")
@@ -743,7 +743,7 @@ UsRolePointsSelectorDirective = ($rootscope, $template) ->
 
     return {link: link}
 
-module.directive("tgUsRolePointsSelector", ["$rootScope", "$tgTemplate", UsRolePointsSelectorDirective])
+module.directive("tgUsRolePointsSelector", ["$rootScope", "$tgTemplate", "$compile", UsRolePointsSelectorDirective])
 
 
 UsPointsDirective = ($tgEstimationsService, $repo, $tgTemplate) ->

@@ -4,14 +4,14 @@
      .activity-fromto
          <% if (removed.length > 0) { %>
          p
-            strong removed
+            strong(translate) removed
             br
             span <%- removed %>
          <% } %>
 
          <% if (added.length > 0) { %>
          p
-            strong added
+            strong(translate) added
             br
             span <%- added %>
          <% } %>

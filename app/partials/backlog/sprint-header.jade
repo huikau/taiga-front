@@ -1,20 +1,16 @@
 .sprint-name
     a.icon.icon-arrow-up(href="", title="Compact Sprint")
-    <% if(isVisible){ %>
-    a(href!="<%- taskboardUrl %>", title!="'Go to the taskboard of '<%- name %>'")
-        span <%- name %>
-    <% } %>
+    a(ng-if="::isVisible", href="{{::taskboardUrl}}", title="{{'Go to the taskboard of' | translate}} {{::name}}")
+        span {{::name}}
 
-    <% if(isEditable){ %>
-    a.icon.icon-edit(href="", title="Edit Sprint")
-    <% } %>
+    a.icon.icon-edit(ng-if="::isEditable", href="", title="{{'Edit Sprint' | translate}}")
 
 .sprint-summary
-    .sprint-date <%- estimatedDateRange %>
+    .sprint-date {{::estimatedDateRange}}
     ul
         li
-            span.number <%- closedPoints %>
-            span.description closed
+            span.number {{::closedPoints}}
+            span.description(translate) closed
         li
-            span.number <%- totalPoints %>
-            span.description total
+            span.number {{::totalPoints}}
+            span.description(translate) total

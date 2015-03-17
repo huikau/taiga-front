@@ -1,9 +1,9 @@
 section.colors-table
     div.table-header
         div.row
-            div.color-column Color
-            div.status-name Name
-            div.is-closed-column Is closed?
+            div.color-column(translate) Color
+            div.status-name(translate) Name
+            div.is-closed-column(translate) Is closed?
             div.options-column
 
     div.table-main
@@ -26,7 +26,7 @@ section.colors-table
                 div.current-color
                 include ../components/select-color
 
-            div.status-name Ready for test
+            div.status-name(translate) Ready for test
             div.is-closed-column
                 div.icon.icon-check-square
             div.options-column

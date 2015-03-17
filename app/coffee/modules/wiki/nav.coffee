@@ -34,7 +34,7 @@ module = angular.module("taigaWiki")
 ## Wiki Main Directive
 #############################################################################
 
-WikiNavDirective = ($tgrepo, $log, $location, $confirm, $navUrls, $analytics, $loading, $template) ->
+WikiNavDirective = ($tgrepo, $log, $location, $confirm, $navUrls, $analytics, $loading, $template, $compile) ->
     template = $template.get("wiki/wiki-nav.html", true)
     link = ($scope, $el, $attrs) ->
         $ctrl = $el.controller()
@@ -52,6 +52,8 @@ WikiNavDirective = ($tgrepo, $log, $location, $confirm, $navUrls, $analytics, $l
                 addWikiLinkPermission: addWikiLinkPermission
                 deleteWikiLinkPermission: deleteWikiLinkPermission
             })
+
+            html = $compile(html)($scope)
 
             $el.off()
             $el.html(html)
@@ -143,4 +145,4 @@ WikiNavDirective = ($tgrepo, $log, $location, $confirm, $navUrls, $analytics, $l
     return {link:link}
 
 module.directive("tgWikiNav", ["$tgRepo", "$log", "$tgLocation", "$tgConfirm", "$tgNavUrls",
-                               "$tgAnalytics", "$tgLoading", "$tgTemplate", WikiNavDirective])
+                               "$tgAnalytics", "$tgLoading", "$tgTemplate", "$compile", WikiNavDirective])

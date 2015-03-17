@@ -1,10 +1,10 @@
 <% if(isEditable){ %>
 .watchers-header
-    span.title watchers
-    a.icon.icon-plus.add-watcher(href="", title="Add watcher")
+    span.title(translate) watchers
+    a.icon.icon-plus.add-watcher(href="", title="{{'Add watcher' | translate}}")
 <% } else if(watchers.length > 0){ %>
 .watchers-header
-    span.title watchers
+    span.title(translate) watchers
 <% }; %>
 
 <% _.each(watchers, function(watcher) { %>
@@ -16,7 +16,7 @@
         span <%- watcher.full_name_display %>
 
         <% if(isEditable){ %>
-        a.icon.icon-delete(data-watcher-id!="<%- watcher.id %>" href="" title="delete-watcher")
+        a.icon.icon-delete(data-watcher-id!="<%- watcher.id %>" href="" title="{{'delete watcher' | translate}}")
         <% }; %>
 <% } %>
 <% }); %>

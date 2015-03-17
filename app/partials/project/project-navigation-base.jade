@@ -1,20 +1,20 @@
 h1 Your projects
 form
     fieldset
-        input.search-project(type="text", placeholder="Search in...")
+        input.search-project(type="text", placeholder="{{'Search in...' | translate}}")
         a.icon.icon-search
 
 div.create-project-button-wrapper
-   a.button-green.create-project-button(href="" title="Create new project")
-       span Create project
+   a.button-green.create-project-button(href="" title="{{'Create new project' | translate}}")
+       span(translate) Create project
 
    div(tg-import-project-button)
-       a.button-blackish.import-project-button(href="" title="Import project")
+       a.button-blackish.import-project-button(href="" title="{{'Import project' | translate}}")
            span.icon.icon-upload
        input.import-file.hidden(type="file")
 
 div.projects-pagination(tg-projects-pagination)
-    a.v-pagination-previous.icon.icon-arrow-up(href="", title="Show previous projects")
+    a.v-pagination-previous.icon.icon-arrow-up(href="", title="{{'Show previous projects' | translate}}")
     div.v-pagination-list
         ul.projects-list
-    a.v-pagination-next.icon.icon-arrow-bottom(href="", title="Show next projects")
+    a.v-pagination-next.icon.icon-arrow-bottom(href="", title="{{'Show next projects' | translate}}")

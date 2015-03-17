@@ -2,7 +2,7 @@
 // Included in the admin-roles.jade and in the RolePermissionsDirective    //
 // in the modules/admin/roles.coffee file.                                 //
 /////////////////////////////////////////////////////////////////////////////
-div.general-category
+div.general-category(translate)
     | Can do estimations?
     div.check
         input(type="checkbox", checked)
@@ -10,7 +10,7 @@ div.general-category
 div.category-config-list
     div.category-config
         div.resume
-            div.resume-title Attachments
+            div.resume-title(translate) Attachments
             div.count 2/7
             div.summary-role
                 div.role-summary-single.active
@@ -23,7 +23,7 @@ div.category-config-list
 
     div.category-config
         div.resume
-            div.resume-title User stories
+            div.resume-title(translate) User stories
             div.count 2/7
             div.summary-role
                 div.role-summary-single.active
@@ -32,34 +32,34 @@ div.category-config-list
 
     div.category-config
         div.resume
-            div.resume-title Issues
+            div.resume-title(translate) Issues
             div.count 2/7
             div.summary-role
                 div.role-summary-single.active
                 div.role-summary-single.inactive
             div.icon.icon-arrow-up
         div.category-items
-            div.category-item
+            div.category-item(translate)
                 | Can modify owned user stories
                 div.check
                     input(type="checkbox")
                     div
-            div.category-item
+            div.category-item(translate)
                 | Can delete user story status
                 div.check
                     input(type="checkbox", checked)
                     div
-            div.category-item
+            div.category-item(translate)
                 | Can delete user story status
                 div.check.enabled
                     input(type="checkbox")
                     div
-            div.category-item
+            div.category-item(translate)
                 | Can delete user story statsu
                 div.check
                     input(type="checkbox", checked)
                     div
-            div.category-item
+            div.category-item(translate)
                 | Can delete user story status
                 div.check
                     input(type="checkbox")
@@ -67,7 +67,7 @@ div.category-config-list
 
     div.category-config
         div.resume
-            div.resume-title User stories
+            div.resume-title(translate) User stories
             div.count 2/7
             div.summary-role
                 div.role-summary-single.active

@@ -107,7 +107,7 @@ module.directive("tgSprintProgressbar", SprintProgressBarDirective)
 ## Created-by display directive
 #############################################################################
 
-CreatedByDisplayDirective = ($template)->
+CreatedByDisplayDirective = ($template, $compile)->
     # Display the owner information (full name and photo) and the date of
     # creation of an object (like USs, tasks and issues).
     #
@@ -127,10 +127,14 @@ CreatedByDisplayDirective = ($template)->
                 full_name_display: "external user"
                 photo: "/images/unnamed.png"
             }
+
             html = template({
                 owner: owner
                 date: moment(model.created_date).format("DD MMM YYYY HH:mm")
             })
+
+            html = $compile(html)($scope)
+
             $el.html(html)
 
         bindOnce $scope, $attrs.ngModel, (model) ->
@@ -145,14 +149,14 @@ CreatedByDisplayDirective = ($template)->
         require: "ngModel"
     }
 
-module.directive("tgCreatedByDisplay", ["$tgTemplate", CreatedByDisplayDirective])
+module.directive("tgCreatedByDisplay", ["$tgTemplate", "$compile", CreatedByDisplayDirective])
 
 
 #############################################################################
 ## Watchers directive
 #############################################################################
 
-WatchersDirective = ($rootscope, $confirm, $repo, $qqueue, $template) ->
+WatchersDirective = ($rootscope, $confirm, $repo, $qqueue, $template, $compile) ->
     # You have to include a div with the tg-lb-watchers directive in the page
     # where use this directive
     #
@@ -200,7 +204,7 @@ WatchersDirective = ($rootscope, $confirm, $repo, $qqueue, $template) ->
                 isEditable: isEditable()
             }
 
-            html = template(ctx)
+            html = $compile(template(ctx))($scope)
             $el.html(html)
 
             if isEditable() and watchers.length == 0
@@ -247,7 +251,7 @@ WatchersDirective = ($rootscope, $confirm, $repo, $qqueue, $template) ->
 
     return {link:link, require:"ngModel"}
 
-module.directive("tgWatchers", ["$rootScope", "$tgConfirm", "$tgRepo", "$tgQqueue", "$tgTemplate", WatchersDirective])
+module.directive("tgWatchers", ["$rootScope", "$tgConfirm", "$tgRepo", "$tgQqueue", "$tgTemplate", "$compile", WatchersDirective])
 
 
 #############################################################################
@@ -291,7 +295,7 @@ AssignedToDirective = ($rootscope, $confirm, $repo, $loading, $qqueue, $template
                 assignedTo: assignedTo
                 isEditable: isEditable()
             }
-            html = template(ctx)
+            html = $compile(template(ctx))($scope)
             $el.html(html)
 
         $el.on "click", ".user-assigned", (event) ->
