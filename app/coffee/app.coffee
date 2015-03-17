@@ -36,7 +36,7 @@ taiga.generateUniqueSessionIdentifier = ->
 taiga.sessionId = taiga.generateUniqueSessionIdentifier()
 
 
-configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEventsProvider, tgLoaderProvider, $compileProvider) ->
+configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEventsProvider, tgLoaderProvider, $compileProvider, $translateProvider) ->
     $routeProvider.when("/",
         {templateUrl: "project/projects.html", resolve: {loader: tgLoaderProvider.add()}})
 
@@ -281,6 +281,7 @@ modules = [
     # Vendor modules
     "ngRoute",
     "ngAnimate",
+    "pascalprecht.translate"
 ].concat(_.map(@.taigaContribPlugins, (plugin) -> plugin.module))
 
 # Main module definition
@@ -294,6 +295,7 @@ module.config([
     "$tgEventsProvider",
     "tgLoaderProvider",
     "$compileProvider",
+    "$translateProvider",
     configure
 ])
 

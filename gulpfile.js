@@ -89,6 +89,7 @@ paths.libs = [
     paths.app + "vendor/angular-route/angular-route.js",
     paths.app + "vendor/angular-sanitize/angular-sanitize.js",
     paths.app + "vendor/angular-animate/angular-animate.js",
+    paths.app + "vendor/angular-translate/angular-translate.js",
     paths.app + "vendor/i18next/i18next.js",
     paths.app + "vendor/moment/min/moment-with-langs.js",
     paths.app + "vendor/checksley/checksley.js",
@@ -122,6 +123,7 @@ gulp.task("jade", function() {
     return gulp.src(paths.jade)
         .pipe(plumber())
         .pipe(cached("jade"))
+        .pipe(insert.prepend('doctype html\n'))
         .pipe(jade({pretty: true, locals:{v:(new Date()).getTime()}}))
         .pipe(gulp.dest(paths.tmp));
 });
@@ -131,6 +133,7 @@ gulp.task("jade-inheritance", function() {
         .pipe(plumber())
         .pipe(cached("jade"))
         .pipe(jadeInheritance({basedir: "./app/"}))
+        .pipe(insert.prepend('doctype html\n'))
         .pipe(jade({pretty: true, locals:{v:(new Date()).getTime()}}))
         .pipe(gulp.dest(paths.tmp));
 });
